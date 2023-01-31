@@ -1,0 +1,48 @@
+.yui-btn {
+  font-size: 14px;
+  height: 32px;
+  padding: 4px 15px;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  &-default {
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+  }
+
+  &-primary {
+    border: 1px solid transparent;
+    background-color: #1677ff;
+    color: #fff;
+  }
+}
+
+@keyframes ripple-animation {
+  from {
+    opacity: 1;
+    transform: scale(0);
+    transform: scale(0);
+    transform: scale(0);
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(3);
+    transform: scale(3);
+    transform: scale(3);
+    transform: scale(3);
+  }
+}
+
+.ripple-div {
+  position: absolute;
+  z-index: 10;
+  background: rgb(255 255 255 / 30%);
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
