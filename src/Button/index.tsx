@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FC, useEffect } from 'react';
+import React, { useEffect, type FC } from 'react';
 import prefix from '../const/prefix';
 import './index.less';
 
