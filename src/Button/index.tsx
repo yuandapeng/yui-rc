@@ -1,17 +1,17 @@
 import classNames from 'classnames';
-import React, { useEffect, type FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import prefix from '../const/prefix';
 import './index.less';
 
 const Button: FC<{
-  title: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-  type: 'primary' | 'default';
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  type?: 'primary' | 'default';
   /** 开启水波纹效果 */
-  enableRipple: boolean;
+  enableRipple?: boolean;
+  children: React.ReactNode;
 }> = (props) => {
   const ButtonRef = React.useRef<HTMLButtonElement>(null);
-  const { type = 'default', enableRipple } = props;
+  const { type = 'default', enableRipple, children, onClick } = props;
 
   useEffect(() => {
     if (!enableRipple) return;
@@ -50,9 +50,9 @@ const Button: FC<{
       type="button"
       ref={ButtonRef}
       className={classNames(`${prefix}-btn`, `${prefix}-btn-${type}`)}
-      onClick={props.onClick}
+      onClick={onClick}
     >
-      {props.title}
+      {children}
     </button>
   );
 };
