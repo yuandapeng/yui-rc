@@ -1,7 +1,7 @@
-# yui
+# yui-rc
 
-[![NPM version](https://img.shields.io/npm/v/yui.svg?style=flat)](https://npmjs.org/package/yui)
-[![NPM downloads](http://img.shields.io/npm/dm/yui.svg?style=flat)](https://npmjs.org/package/yui)
+[![NPM version](https://img.shields.io/npm/v/yui-rc.svg?style=flat)](https://npmjs.org/package/yui-rc)
+[![NPM downloads](http://img.shields.io/npm/dm/yui-rc.svg?style=flat)](https://npmjs.org/package/yui-rc)
 
 A react library developed with dumi
 

@@ -1,1 +1,1 @@
-export default 'yui';
+export default 'yui-rc';
