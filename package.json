@@ -1,6 +1,6 @@
 {
   "name": "yui-rc",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A react library developed with dumi",
   "license": "MIT",
   "module": "dist/index.js",
@@ -44,11 +44,16 @@
     ]
   },
   "dependencies": {
-    "classnames": "^2.3.2"
+    "classnames": "^2.3.2",
+    "rc-align": "^4.0.15",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
+    "@types/react-dom": "^18.0.10",
+    "@types/react-is": "^17.0.3",
     "@umijs/lint": "^4.0.0",
     "dumi": "^2.0.2",
     "eslint": "^8.23.0",
