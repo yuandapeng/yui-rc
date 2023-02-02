@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useEffect, useRef, useState, type FC } from 'react';
 import * as ReactIs from 'react-is';
-import prefix from 'yui-rc/const/prefix';
+import prefix from '../const/prefix';
 import Portal from './Portal';
 
 import Align from 'rc-align';
