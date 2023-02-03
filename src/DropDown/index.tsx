@@ -11,6 +11,8 @@ interface IOption {
   key: string;
 }
 
+const delay = 0.1;
+
 const DropDown: FC<{
   onClick?: (e: React.MouseEvent, item: IOption) => void;
   placement?: 'top' | 'bottom' | 'left' | 'right';
@@ -21,8 +23,9 @@ const DropDown: FC<{
 }> = (props) => {
   const { trigger = 'hover', className, menus = [] } = props;
   const [open, setOpen] = useState(false);
-  const triggerRef = useRef<HTMLDivElement>();
-  const menuRef = useRef<HTMLUListElement>();
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
+  const timer = useRef<NodeJS.Timeout>();
   const handleMenuItemClick = (e: React.MouseEvent, item: IOption) => {
     props.onClick?.(e, item);
   };
@@ -39,6 +42,18 @@ const DropDown: FC<{
     };
   }, []);
 
+  const clearTimer = () => {
+    clearTimeout(timer.current);
+  };
+
+  /** hover 延时执行更新打开状态 */
+  const delaySetOpen = (visible: boolean, timeout = 0) => {
+    timer.current = setTimeout(() => {
+      clearTimer();
+      setOpen(visible);
+    }, timeout * 1000);
+  };
+
   if (React.Children.only(props.children)) {
     if (React.isValidElement(props.children)) {
       if (ReactIs.isFragment(props.children)) {
@@ -49,10 +64,10 @@ const DropDown: FC<{
         const proxyProps: {
           onMouseEnter?: React.MouseEventHandler;
           onClick?: React.MouseEventHandler;
-          onMouseOut?: React.MouseEventHandler;
+          onMouseLeave?: React.MouseEventHandler;
           onBlur?: React.MouseEventHandler;
           className?: string;
-          ref: any;
+          ref: React.RefObject<HTMLDivElement>;
         } = {
           ref: triggerRef,
         };
@@ -63,12 +78,11 @@ const DropDown: FC<{
           };
         } else {
           proxyProps.onMouseEnter = () => {
+            clearTimer();
             setOpen(true);
           };
-          proxyProps.onMouseOut = (e) => {
-            const moveTo = e.relatedTarget;
-            if (moveTo === menuRef.current) return;
-            setOpen(false);
+          proxyProps.onMouseLeave = () => {
+            delaySetOpen(false, delay);
           };
         }
 
@@ -81,6 +95,18 @@ const DropDown: FC<{
         );
 
         const triggerNode = React.cloneElement(props.children, proxyProps);
+
+        const popupEvent: {
+          onMouseEnter?: React.MouseEventHandler;
+          onMouseLeave?: React.MouseEventHandler;
+        } = {};
+
+        if (trigger === 'hover') {
+          popupEvent.onMouseEnter = clearTimer;
+          popupEvent.onMouseLeave = () => {
+            delaySetOpen(false, delay);
+          };
+        }
 
         return (
           <>
@@ -100,6 +126,7 @@ const DropDown: FC<{
                     className={classNames(`${prefix}-dropdown-popup`, {
                       [`${prefix}-dropdown-popup-open`]: open,
                     })}
+                    {...popupEvent}
                   >
                     {menus.map((item) => (
                       <li
