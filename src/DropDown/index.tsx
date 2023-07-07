@@ -6,7 +6,7 @@ import Portal from './Portal';
 
 import Align from 'rc-align';
 import './index.less';
-interface IOption {
+export interface IOption {
   label: React.ReactNode;
   key: string;
 }
@@ -18,19 +18,33 @@ const DropDown: FC<{
   placement?: 'top' | 'bottom' | 'left' | 'right';
   trigger?: 'hover' | 'click';
   children: React.ReactNode;
-  className?: string;
+  onChange?: (value: string | number, option: IOption) => void;
   menus: Array<{ label: React.ReactNode; key: string }>;
+  value?: string | number;
 }> = (props) => {
-  const { trigger = 'hover', className, menus = [] } = props;
+  const { trigger = 'hover', menus = [] } = props;
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
   const timer = useRef<NodeJS.Timeout>();
+  const [value, setValue] = useState<string | number | undefined>(props.value);
+
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.value]);
+
   const handleMenuItemClick = (e: React.MouseEvent, item: IOption) => {
     props.onClick?.(e, item);
+    if (item.key !== value) {
+      props.onChange?.(item.key, item);
+    }
+    setValue(item.key);
   };
   useEffect(() => {
     const handleMenuClick = (e: MouseEvent) => {
+      const isChildClick = triggerRef.current?.contains(e.target as Element);
+      // 点击child不关闭
+      if (isChildClick) return;
       // menu 容器
       if (e.target !== menuRef.current && e.target !== triggerRef.current) {
         setOpen(false);
@@ -91,7 +105,7 @@ const DropDown: FC<{
           {
             [`${prefix}-dropdown-open`]: open,
           },
-          className,
+          (props.children as React.ClassicComponent<any>)?.props.className,
         );
 
         const triggerNode = React.cloneElement(props.children, proxyProps);
@@ -130,6 +144,10 @@ const DropDown: FC<{
                   >
                     {menus.map((item) => (
                       <li
+                        className={classNames({
+                          [`${prefix}-dropdown-menu-item-active`]:
+                            value === item?.key,
+                        })}
                         key={item.key}
                         onClick={(e) => handleMenuItemClick(e, item)}
                       >
