@@ -10,9 +10,6 @@ on:
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
-    permissions:
-     contents: read
-     id-token: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -21,5 +18,4 @@ jobs:
           registry-url: https://registry.npmjs.org
       - uses: JS-DevTools/npm-publish@v2
         with:
-          token: ${{secrets.NPM_AUTH_TOKEN}}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
