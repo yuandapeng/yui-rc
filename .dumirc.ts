@@ -6,5 +6,8 @@ export default defineConfig({
   base: '/yui-rc/',
   themeConfig: {
     name: 'yui-rc',
+    socialLinks: {
+      github: 'https://github.com/yuandapeng/yui-rc',
+    },
   },
 });
