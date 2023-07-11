@@ -16,6 +16,7 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org
+      - run: echo `${{ secrets.NPM_AUTH_TOKEN }}`
       - uses: JS-DevTools/npm-publish@v2
         with:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
