@@ -1,7 +1,25 @@
-import classNames from 'classnames';
 import React, { useEffect, type FC } from 'react';
+import styled, { css } from 'styled-components';
 import prefix from '../const/prefix';
 import './index.less';
+
+const StyledButton = styled.button<{ $mode?: 'primary' | 'default' }>`
+  ${(props) => {
+    switch (props.$mode) {
+      case 'primary':
+        return css`
+          border: 1px solid transparent;
+          background-color: #1677ff;
+          color: #fff;
+        `;
+      default:
+        return css`
+          border: 1px solid #d9d9d9;
+          background-color: #fff;
+        `;
+    }
+  }}
+`;
 
 const Button: FC<{
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -46,14 +64,15 @@ const Button: FC<{
   }, []);
 
   return (
-    <button
+    <StyledButton
       type="button"
       ref={ButtonRef}
-      className={classNames(`${prefix}-btn`, `${prefix}-btn-${type}`)}
+      $mode={type}
+      className={`${prefix}-btn`}
       onClick={onClick}
     >
       {children}
-    </button>
+    </StyledButton>
   );
 };
 

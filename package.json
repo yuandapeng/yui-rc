@@ -2,6 +2,11 @@
   "name": "yui-rc",
   "version": "0.1.5",
   "description": "A react library developed with dumi",
+  "homepage": "https://github.com/yuandapeng/yui-rc#readme",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yuandapeng/yui-rc.git"
+  },
   "license": "MIT",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -47,7 +52,8 @@
     "classnames": "^2.3.2",
     "rc-align": "^4.0.15",
     "react-dom": "^18.2.0",
-    "react-is": "^18.2.0"
+    "react-is": "^18.2.0",
+    "styled-components": "^6.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
@@ -55,6 +61,7 @@
     "@types/react-dom": "^18.0.10",
     "@types/react-is": "^17.0.3",
     "@umijs/lint": "^4.0.0",
+    "babel-plugin-styled-components": "^2.1.4",
     "dumi": "^2.0.2",
     "eslint": "^8.23.0",
     "father": "^4.1.0",
@@ -76,10 +83,5 @@
   },
   "authors": [
     "yuandapeng <18852369945@163.com>"
-  ],
-  "homepage": "https://github.com/yuandapeng/yui-rc#readme",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:yuandapeng/yui-rc.git"
-  }
+  ]
 }

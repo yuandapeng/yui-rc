@@ -10,4 +10,12 @@ export default defineConfig({
       github: 'https://github.com/yuandapeng/yui-rc',
     },
   },
+  extraBabelPlugins: [
+    [
+      'babel-plugin-styled-components',
+      {
+        ssr: false,
+      },
+    ],
+  ],
 });
