@@ -14,7 +14,7 @@ export default defineConfig({
     [
       'babel-plugin-styled-components',
       {
-        ssr: false,
+        namespace: 'yui-rc',
       },
     ],
   ],
