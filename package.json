@@ -76,5 +76,10 @@
   },
   "authors": [
     "yuandapeng <18852369945@163.com>"
-  ]
+  ],
+  "homepage": "https://github.com/yuandapeng/yui-rc#readme",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yuandapeng/yui-rc.git"
+  }
 }
