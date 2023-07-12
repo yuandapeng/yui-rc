@@ -1,6 +1,5 @@
-import classNames from 'classnames';
 import React, { useEffect, type FC } from 'react';
-import prefix from '../const/prefix';
+import StyledButton from './StyledButton';
 import './index.less';
 
 const Button: FC<{
@@ -46,14 +45,9 @@ const Button: FC<{
   }, []);
 
   return (
-    <button
-      type="button"
-      ref={ButtonRef}
-      className={classNames(`${prefix}-btn`, `${prefix}-btn-${type}`)}
-      onClick={onClick}
-    >
+    <StyledButton type="button" ref={ButtonRef} $type={type} onClick={onClick}>
       {children}
-    </button>
+    </StyledButton>
   );
 };
 
